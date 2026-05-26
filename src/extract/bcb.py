@@ -2,7 +2,21 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-def fetch_bcb_series(codigo, nome, data_inicio, data_fim):
+def fetch_bcb_series(codigo:int, nome:str, data_inicio:str, data_fim:str): 
+    """
+    Essa função busca uma série temporal na API do Banco Central, transforma a resposta JSON em um DataFrame do pandas, converte
+    a coluna de data para datetime, converte os valores para número e retorna a tabela pronta para análise.
+
+    Args:
+        codigo: Código SGS da série.
+        nome: Nome da coluna no DataFrame.
+        data_inicio: Data inicial no formato dd/mm/yyyy.
+        data_fim: Data final no formato dd/mm/yyyy.
+
+    Returns:
+        pandas.DataFrame: DataFrame contendo datas e valores da série.
+    
+    """
     url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados'
     params = {
     'formato': 'json',
